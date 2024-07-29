@@ -1,0 +1,7 @@
+.env
+poetry.lock
+.idea/
+db/
+src/zoocrew/__pycache__
+src/zoocrew/db
+

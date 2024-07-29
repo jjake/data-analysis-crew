@@ -1,0 +1,5 @@
+SERPER_API_KEY=
+BROWSERLESS_API_KEY=KEY # https://www.browserless.io/ (free tier)
+OPENAI_API_KEY=
+OPENAI_MODEL_NAME=
+GROQ_API_KEY=
