@@ -1,6 +1,0 @@
-feed_animals_task:
-  description: >
-    Given an inventory of food, identify the proper meal for each animal in {animals}
-  expected_output: >
-    The name of the animal and a list of foods to feed it today.  Return
-    exactly the JSON formal specified.
