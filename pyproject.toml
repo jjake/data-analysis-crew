@@ -1,8 +1,8 @@
 [tool.poetry]
-name = "zoocrew"
+name = "data_analyst"
 version = "0.1.0"
-description = "change me to describe your tool"
-authors = ["Your Name <you@example.com>"]
+description = "A data analytics team"
+authors = ["Your Name <jacob@phyleserver.com>"]
 
 [tool.poetry.dependencies]
 python = ">=3.10,<=3.13"
@@ -14,7 +14,10 @@ langchain-groq = "^0.1.6"
 langchain-community = "^0.2.10"
 
 [tool.poetry.scripts]
-feed = "zoocrew.main:run"
+prepare_metadata = "data_analyst.main:prepare_metadata"
+formulate_hypotheses = "data_analyst.main:formulate_hypotheses"
+attach_statistical_tests = "data_analyst.main:attach_statistical_tests"
+attach_code = "data_analyst.main:attach_code"
 
 [build-system]
 requires = ["poetry-core"]

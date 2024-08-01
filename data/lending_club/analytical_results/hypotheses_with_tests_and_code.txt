@@ -1,0 +1,171 @@
+```python
+# Import necessary libraries
+import pandas as pd
+import numpy as np
+import statsmodels.api as sm
+import seaborn as sns
+import matplotlib.pyplot as plt
+from scipy import stats
+
+# Load the dataset (assuming the dataset is in a CSV file format)
+# Replace 'your_dataset.csv' with the actual dataset file path
+df = pd.read_csv('your_dataset.csv')
+
+# Set up a figure for visualizations
+plt.figure(figsize=(14, 10))
+
+# 1. Income Stability
+# Logistic Regression for annual income and loan status
+X1 = df[['annual_inc']]
+y1 = df['loan_status']
+X1 = sm.add_constant(X1)  # Adds a constant term to the predictor
+model1 = sm.Logit(y1, X1).fit()
+print(model1.summary())
+
+# Visualization for Income Stability
+sns.boxplot(x='loan_status', y='annual_inc', data=df)
+plt.title('Income Stability: Annual Income vs Loan Status')
+plt.show()
+# Change: Target marketing to higher-income individuals.
+
+# 2. Employment Duration
+# Logistic Regression for employment length and loan status
+X2 = df[['emp_length']]
+y2 = df['loan_status']
+X2 = sm.add_constant(X2)
+model2 = sm.Logit(y2, X2).fit()
+print(model2.summary())
+
+# Visualization for Employment Duration
+sns.boxplot(x='loan_status', y='emp_length', data=df)
+plt.title('Employment Duration: Employment Length vs Loan Status')
+plt.show()
+# Change: Promote products to individuals with stable employment.
+
+# 3. Credit Utilization Ratio
+# Logistic Regression for revol_util and loan status
+X3 = df[['revol_util']]
+y3 = df['loan_status']
+X3 = sm.add_constant(X3)
+model3 = sm.Logit(y3, X3).fit()
+print(model3.summary())
+
+# Visualization for Credit Utilization Ratio
+sns.boxplot(x='loan_status', y='revol_util', data=df)
+plt.title('Credit Utilization Ratio: Revolving Utilization vs Loan Status')
+plt.show()
+# Change: Educate on responsible credit use.
+
+# 4. Home Ownership Status
+# Chi-squared test for home ownership and loan status
+contingency_table = pd.crosstab(df['home_ownership'], df['loan_status'])
+chi2, p, _, _ = stats.chi2_contingency(contingency_table)
+print(f'Chi-squared Test: chi2 = {chi2}, p-value = {p}')
+
+# Visualization for Home Ownership Status
+sns.countplot(x='home_ownership', hue='loan_status', data=df)
+plt.title('Home Ownership Status vs Loan Status')
+plt.show()
+# Change: Create products for homeowners.
+
+# 5. Credit History Length
+# Create a new column for credit history length
+df['earliest_cr_line'] = pd.to_datetime(df['earliest_cr_line'])
+df['credit_history_length'] = (pd.to_datetime('today') - df['earliest_cr_line']).dt.days / 365.25
+
+# Logistic Regression for credit history length and loan status
+X5 = df[['credit_history_length']]
+y5 = df['loan_status']
+X5 = sm.add_constant(X5)
+model5 = sm.Logit(y5, X5).fit()
+print(model5.summary())
+
+# Visualization for Credit History Length
+sns.boxplot(x='loan_status', y='credit_history_length', data=df)
+plt.title('Credit History Length: Length of Credit History vs Loan Status')
+plt.show()
+# Change: Target established credit individuals.
+
+# 6. Charge-Off History
+# Logistic Regression for charge-off history and loan status
+X6 = df[['chargeoff_within_12_mths']]
+y6 = df['loan_status']
+X6 = sm.add_constant(X6)
+model6 = sm.Logit(y6, X6).fit()
+print(model6.summary())
+
+# Visualization for Charge-Off History
+sns.boxplot(x='loan_status', y='chargeoff_within_12_mths', data=df)
+plt.title('Charge-Off History: Charge-Off Within 12 Months vs Loan Status')
+plt.show()
+# Change: Prioritize clean credit histories for premium products.
+
+# 7. Credit Inquiries
+# Logistic Regression for credit inquiries and loan status
+X7 = df[['inq_last_12m']]
+y7 = df['loan_status']
+X7 = sm.add_constant(X7)
+model7 = sm.Logit(y7, X7).fit()
+print(model7.summary())
+
+# Visualization for Credit Inquiries
+sns.boxplot(x='loan_status', y='inq_last_12m', data=df)
+plt.title('Credit Inquiries: Inquiries Last 12 Months vs Loan Status')
+plt.show()
+# Change: Educate on inquiry impacts.
+
+# 8. Debt-to-Income Ratio
+# Logistic Regression for DTI and loan status
+X8 = df[['dti']]
+y8 = df['loan_status']
+X8 = sm.add_constant(X8)
+model8 = sm.Logit(y8, X8).fit()
+print(model8.summary())
+
+# Visualization for Debt-to-Income Ratio
+sns.boxplot(x='loan_status', y='dti', data=df)
+plt.title('Debt-to-Income Ratio: DTI vs Loan Status')
+plt.show()
+# Change: Offer debt management workshops.
+
+# 9. Geographic Stability
+# Chi-squared test for geographic stability and loan status
+geographic_contingency_table = pd.crosstab(df['addr_state'], df['loan_status'])
+chi2_geo, p_geo, _, _ = stats.chi2_contingency(geographic_contingency_table)
+print(f'Geographic Stability Chi-squared Test: chi2 = {chi2_geo}, p-value = {p_geo}')
+
+# Visualization for Geographic Stability
+sns.countplot(x='addr_state', hue='loan_status', data=df)
+plt.title('Geographic Stability: Address State vs Loan Status')
+plt.show()
+# Change: Target marketing to low-risk regions.
+
+# 10. Payment History
+# Logistic Regression for payment history and loan status
+X10 = df[['num_sats']]
+y10 = df['loan_status']
+X10 = sm.add_constant(X10)
+model10 = sm.Logit(y10, X10).fit()
+print(model10.summary())
+
+# Visualization for Payment History
+sns.boxplot(x='loan_status', y='num_sats', data=df)
+plt.title('Payment History: Number of Satisfactory Payments vs Loan Status')
+plt.show()
+# Change: Reward good payment histories.
+
+# Building a final model that incorporates all variables to predict loan default risk
+X_final = df[['annual_inc', 'emp_length', 'revol_util', 'credit_history_length', 
+               'chargeoff_within_12_mths', 'inq_last_12m', 'dti', 'num_sats']]
+y_final = df['loan_status']
+X_final = sm.add_constant(X_final)
+final_model = sm.Logit(y_final, X_final).fit()
+print(final_model.summary())
+
+# Final Model Insights: Identify attributes of customers with low risk of default
+low_risk_customers = df[final_model.predict(X_final) < 0.5]  # Assuming a threshold of 0.5 for low risk
+print(low_risk_customers.describe())
+
+# Suggest growth programs to attract more customers like them
+# For example, targeting customers with high annual income, stable employment, low DTI, etc.
+```

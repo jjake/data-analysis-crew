@@ -1,0 +1,10 @@
+1. **Income Stability**: Higher annual incomes correlate with lower default risk (Variables: "annual_inc", "dti", "loan_status"). Change: Target marketing to higher-income individuals.  
+2. **Employment Duration**: Longer employment leads to lower default risk (Variables: "emp_length", "loan_status"). Change: Promote products to individuals with stable employment.  
+3. **Credit Utilization Ratio**: Lower utilization reduces default risk (Variables: "revol_util", "loan_status"). Change: Educate on responsible credit use.  
+4. **Home Ownership Status**: Homeowners have a lower default risk than renters (Variables: "home_ownership", "loan_status"). Change: Create products for homeowners.  
+5. **Credit History Length**: Longer credit histories correlate with lower default risk (Variables: "earliest_cr_line", "loan_status"). Change: Target established credit individuals.  
+6. **Charge-Off History**: Fewer charge-offs indicate lower default risk (Variables: "chargeoff_within_12_mths", "loan_status"). Change: Prioritize clean credit histories for premium products.  
+7. **Credit Inquiries**: Fewer inquiries correlate with lower default risk (Variables: "inq_last_12m", "loan_status"). Change: Educate on inquiry impacts.  
+8. **Debt-to-Income Ratio**: Lower DTI indicates lower default risk (Variables: "dti", "loan_status"). Change: Offer debt management workshops.  
+9. **Geographic Stability**: Stability in residence correlates with lower default risk (Variables: "addr_state", "loan_status"). Change: Target marketing to low-risk regions.  
+10. **Payment History**: On-time payments correlate with lower default risk (Variables: "num_sats", "loan_status"). Change: Reward good payment histories.

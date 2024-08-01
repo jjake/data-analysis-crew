@@ -1,0 +1,39 @@
+1. **Income Stability**: Higher annual incomes correlate with lower default risk.  
+   - **Change**: Target marketing to higher-income individuals.  
+   - **Statistical Test**: Perform a logistic regression analysis with "annual_inc" as the independent variable and "loan_status" as the dependent variable to assess the correlation between income and default risk.
+
+2. **Employment Duration**: Longer employment leads to lower default risk.  
+   - **Change**: Promote products to individuals with stable employment.  
+   - **Statistical Test**: Conduct a logistic regression analysis using "emp_length" as the independent variable and "loan_status" as the dependent variable to determine the relationship between employment duration and default risk.
+
+3. **Credit Utilization Ratio**: Lower utilization reduces default risk.  
+   - **Change**: Educate on responsible credit use.  
+   - **Statistical Test**: Use logistic regression with "revol_util" as the independent variable and "loan_status" as the dependent variable to analyze the impact of credit utilization on default risk.
+
+4. **Home Ownership Status**: Homeowners have a lower default risk than renters.  
+   - **Change**: Create products for homeowners.  
+   - **Statistical Test**: Implement a chi-squared test of independence between "home_ownership" and "loan_status" to evaluate whether home ownership status is associated with default risk.
+
+5. **Credit History Length**: Longer credit histories correlate with lower default risk.  
+   - **Change**: Target established credit individuals.  
+   - **Statistical Test**: Conduct a logistic regression analysis with "earliest_cr_line" (transformed into the length of credit history) as the independent variable and "loan_status" as the dependent variable to assess the effect of credit history length on default risk.
+
+6. **Charge-Off History**: Fewer charge-offs indicate lower default risk.  
+   - **Change**: Prioritize clean credit histories for premium products.  
+   - **Statistical Test**: Carry out a logistic regression analysis using "chargeoff_within_12_mths" as the independent variable and "loan_status" as the dependent variable to determine the relationship between charge-off history and default risk.
+
+7. **Credit Inquiries**: Fewer inquiries correlate with lower default risk.  
+   - **Change**: Educate on inquiry impacts.  
+   - **Statistical Test**: Apply logistic regression with "inq_last_12m" as the independent variable and "loan_status" as the dependent variable to analyze the association between credit inquiries and default risk.
+
+8. **Debt-to-Income Ratio**: Lower DTI indicates lower default risk.  
+   - **Change**: Offer debt management workshops.  
+   - **Statistical Test**: Perform logistic regression with "dti" as the independent variable and "loan_status" as the dependent variable to investigate the impact of DTI on default risk.
+
+9. **Geographic Stability**: Stability in residence correlates with lower default risk.  
+   - **Change**: Target marketing to low-risk regions.  
+   - **Statistical Test**: Utilize a chi-squared test of independence between "addr_state" and "loan_status" to evaluate the relationship between geographic stability and default risk.
+
+10. **Payment History**: On-time payments correlate with lower default risk.  
+    - **Change**: Reward good payment histories.  
+    - **Statistical Test**: Conduct a logistic regression analysis with "num_sats" as the independent variable and "loan_status" as the dependent variable to assess the correlation between payment history and default risk.

@@ -1,6 +1,12 @@
 from crewai import Agent, Crew, Process, Task
 from crewai.project import CrewBase, agent, crew, task
-from crewai_tools import SerperDevTool, ScrapeWebsiteTool, TXTSearchTool
+from crewai_tools import (SerperDevTool,
+                          ScrapeWebsiteTool,
+                          TXTSearchTool,
+                          DirectorySearchTool,
+                          DirectoryReadTool,
+                          CSVSearchTool,
+                          FileReadTool)
 from pydantic import BaseModel, Field
 from typing import List, Optional
 
@@ -10,7 +16,7 @@ class AnimalFood(BaseModel):
 
 
 @CrewBase
-class ZooCrew():
+class DataAnalysisCrew():
 
     def __init__(self,llm):
         self.llm = llm
@@ -19,36 +25,115 @@ class ZooCrew():
     tasks_config = 'config/tasks.yaml'
 
     @agent
-    def zookeeper(self) -> Agent:
+    def data_analyst(self) -> Agent:
         return Agent(
-            config=self.agents_config['zookeeper'],
-            tools=[SerperDevTool(),
-                   ScrapeWebsiteTool(),
-                   TXTSearchTool(txt="./data/food_inventory.txt")],
+            config=self.agents_config['data_analyst'],
+            tools=[],
             verbose=False,
             allow_delegation=False,
             llm=self.llm,
-            output_json=AnimalFood
         )
 
+    @agent
+    def business_analyst(self) -> Agent:
+        return Agent(
+            config=self.agents_config['business_analyst'],
+            tools=[],
+            verbose=False,
+            allow_delegation=False,
+            llm=self.llm,
+        )
+
+    @agent
+    def statistician(self) -> Agent:
+        return Agent(
+            config=self.agents_config['statistician'],
+            tools=[],
+            verbose=False,
+            allow_delegation=False,
+            llm=self.llm,
+        )
     @task
-    def feed_animals_task(self) -> Task:
+    def build_data_metadata_task(self) -> Task:
         return Task(
-            config=self.tasks_config['feed_animals_task'],
-            agent=self.zookeeper(),
+            config=self.tasks_config['build_data_metadata_task'],
+            agent=self.data_analyst(),
+            tools=[DirectoryReadTool(),FileReadTool()],
+            memory=True
+        )
+    @task
+    def formulate_hypotheses_task(self) -> Task:
+        return Task(
+            config=self.tasks_config['formulate_hypotheses_task'],
+            agent=self.business_analyst(),
+            tools=[FileReadTool()],
+            memory=True
+        )
+    @task
+    def attach_statistical_tests_task(self) -> Task:
+        return Task(
+            config=self.tasks_config['attach_statistical_tests_task'],
+            agent=self.statistician(),
+            tools=[FileReadTool()],
+            memory=True
+        )
+    @task
+    def attach_code_task(self) -> Task:
+        return Task(
+            config=self.tasks_config['attach_code_task'],
+            agent=self.data_scientist(),
+            tools=[FileReadTool()],
             memory=True
         )
 
+    @agent
+    def data_scientist(self) -> Agent:
+        return Agent(
+            config=self.agents_config['data_scientist'],
+            tools=[],
+            verbose=False,
+            allow_delegation=False,
+            llm=self.llm,
+        )
     @crew
-    def feeding_crew(self) -> Crew:
-        """Create the zookeepers!"""
+    def prepare_metadata_crew(self) -> Crew:
 
         return Crew(
-            agents=[self.zookeeper()],
-            tasks=[self.feed_animals_task()],
+            agents=[self.data_analyst()],
+            tasks=[self.build_data_metadata_task()],
             process=Process.sequential,
             planning=True,
             memory=True,
             verbose=2
         )
+
+    def formulate_hypotheses_crew(self) -> Crew:
+        return Crew(
+            agents=[self.data_analyst()],
+            tasks=[self.formulate_hypotheses_task()],
+            process=Process.sequential,
+            planning=True,
+            memory=True,
+            verbose=2
+        )
+    def attach_statistical_tests_crew(self) -> Crew:
+        return Crew(
+            agents=[self.statistician()],
+            tasks=[self.attach_statistical_tests_task()],
+            process=Process.sequential,
+            planning=True,
+            memory=True,
+            verbose=2
+        )
+
+    def attach_code_crew(self) -> Crew:
+        return Crew(
+            agents=[self.data_scientist()],
+            tasks=[self.attach_code_task()],
+            process=Process.sequential,
+            planning=True,
+            memory=True,
+            verbose=2
+        )
+
 

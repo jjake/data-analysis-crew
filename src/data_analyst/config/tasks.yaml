@@ -1,6 +1,79 @@
-feed_animals_task:
+build_data_metadata_task:
   description: >
-    Given an inventory of food, identify the proper meal for each animal in {animals}
+    Given a data card {data_card} and
+    a directory of metadata files {metadata_dir}
+    prepare a comprehensive data dictionary using all
+    files found in that directory.
+    
+    The data dictionary should contain column names,
+    descriptions, enumerative values and anything else
+    that would be useful to data scientists, data analysts
+    and statisticians.
+    
+    Include ALL columns mentioned in any file in {metadata_dir}.
+    
+    The data dictionary should be useful for
+    * Business analysts generating and validating hypotheses
+    * Statisticians and data scientists generating experiments, hypothesis tests and analyses
+    * data scientists and engineers writing code to perform analyses
+
   expected_output: >
-    The name of the animal and a list of foods to feed it today.  Return
-    exactly the JSON formal specified.
+    A data dictionary in JSON format. 
+
+formulate_hypotheses_task:
+  description: >
+    Given the fundamental business objective
+    
+    {business_objective}
+  
+    Formulate {num_hypotheses} hypotheses from the data described in
+    {data_dictionary} where successful test of the hypothesis
+    would imply a recommended business activity or change.  Hypotheses
+    can include interactions of many of the variables with a preference
+    for multivariate hypotheses.
+    
+    Use only data contained in the data dictionary.
+
+  expected_output: >
+    A list of hypotheses, each containing
+    - A short name
+    - A description of the hypothesis
+    - A list of variables from the data dictionary that would be needed to test the hypothesis
+    - The proposed change to the business should the hypothesis prove true
+
+attach_statistical_tests_task:
+  description: >
+    Given a set of hypotheses from file {hypotheses_file}, attach to each 
+    element of the list a specific
+    statistical test or analysis using the variables mentioned in the hypothesis. 
+    You are free to use 
+    any columns mentioned in the data dictionary {data_dictionary} but 
+    focus on the ones listed in the description for each hypothesis.
+    In the description of the test use the actual variable names
+    listed and in the data dictionary.
+
+  expected_output: >
+    A list of hypotheses each containing
+    - A short name
+    - A description of the hypothesis
+    - The proposed change to the business should the hypothesis prove true
+    - An english description of the specific statistical test or analysis needed to 
+      prove the hypothesis
+
+attach_code_task:
+  description: >
+      Given a set of hypotheses and associated statistical tests 
+      from file {stats_file}, write and return idiomatic, well-commented code to run in a 
+      Python notebook that executes all tests and formats or visualizes results.  In the 
+      comments, include the description of the hypothesis, the english language
+      of the statistical test and the proposed change to the hypothesis should the 
+      hypothesis prove true.
+    
+      As a final step, write and return code to build and report on a model incorporating
+      all of the hypotheses into a single model of improving 
+      the business outcome:
+    
+      {business_objective}
+
+  expected_output: >
+      A python notebook executing all of the tests and visualizing or reporting the results.
