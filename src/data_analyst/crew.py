@@ -61,6 +61,18 @@ class DataAnalysisCrew():
             tools=[DirectoryReadTool(),FileReadTool()],
             memory=True
         )
+
+    @task
+    def contextual_research_task(self) -> Task:
+        return Task(
+            config=self.tasks_config['contextual_research_task'],
+            agent=self.data_analyst(),
+            tools=[DirectoryReadTool(),
+                   FileReadTool(),
+                   SerperDevTool(),
+                   TXTSearchTool()],
+            memory=True
+        )
     @task
     def formulate_hypotheses_task(self) -> Task:
         return Task(
@@ -110,7 +122,8 @@ class DataAnalysisCrew():
     def formulate_hypotheses_crew(self) -> Crew:
         return Crew(
             agents=[self.data_analyst()],
-            tasks=[self.formulate_hypotheses_task()],
+            tasks=[self.contextual_research_task(),
+                   self.formulate_hypotheses_task()],
             process=Process.sequential,
             planning=True,
             memory=True,

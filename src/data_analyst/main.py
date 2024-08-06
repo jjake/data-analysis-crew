@@ -24,7 +24,6 @@ def manage_args():
                       type=str,
                       help="root directory for data analysis")
   args = parser.parse_args()
-  args = parser.parse_args()
   root_dir = args.dir
   root = './data/' + root_dir + '/'
   return {
@@ -74,7 +73,8 @@ def formulate_hypotheses():
   inputs = {
     'business_objective' : 'Identify the attributes of customers with a low risk of default and suggest growth programs to attract more customers like them',
     'data_dictionary' : files['analytics_root'] + '/data_dictionary.json',
-    'num_hypotheses' : '10'
+    'num_hypotheses' : '10',
+    'data_card' : files['data_card']
   }
 
   # Replace with your inputs, it will automatically interpolate any tasks and agents information

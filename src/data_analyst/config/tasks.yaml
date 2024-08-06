@@ -20,6 +20,20 @@ build_data_metadata_task:
   expected_output: >
     A data dictionary in JSON format. 
 
+contextual_research_task:
+  description: >
+    Given the business objective
+    
+    {business_objective}
+    
+    and the data card located at the file {data_card} as well
+    as the data dictionary in the file {data_dictionary} perform external
+    research on the internet to try to determine how the data given
+    can be used to achieve the business objective.
+  expected_output:
+    A research report on how to use the data given to achive the
+    business objective.
+
 formulate_hypotheses_task:
   description: >
     Given the fundamental business objective
@@ -62,18 +76,23 @@ attach_statistical_tests_task:
 
 attach_code_task:
   description: >
-      Given a set of hypotheses and associated statistical tests 
-      from file {stats_file}, write and return idiomatic, well-commented code to run in a 
-      Python notebook that executes all tests and formats or visualizes results.  In the 
-      comments, include the description of the hypothesis, the english language
-      of the statistical test and the proposed change to the hypothesis should the 
-      hypothesis prove true.
+    Given a set of hypotheses and associated statistical tests 
+    from file {stats_file}, write and return idiomatic, well-commented code to run in a 
+    Python notebook that executes all tests and formats or visualizes results.
     
-      As a final step, write and return code to build and report on a model incorporating
-      all of the hypotheses into a single model of improving 
-      the business outcome:
+    Pay special attention to loading the data frame properly with respect to 
+    categorical variables.
     
-      {business_objective}
+    In the comments, include the description of the hypothesis, the english language
+    of the statistical test and the proposed change to the hypothesis should the 
+    hypothesis prove true.
+    
+    As a final step, write and return code to build and report on a model incorporating
+    all of the hypotheses into a single model of improving 
+    the business outcome:
+    
+    {business_objective}
+    
 
   expected_output: >
       A python notebook executing all of the tests and visualizing or reporting the results.

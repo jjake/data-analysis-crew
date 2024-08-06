@@ -1,10 +1,51 @@
-1. **Income Stability**: Higher annual incomes correlate with lower default risk (Variables: "annual_inc", "dti", "loan_status"). Change: Target marketing to higher-income individuals.  
-2. **Employment Duration**: Longer employment leads to lower default risk (Variables: "emp_length", "loan_status"). Change: Promote products to individuals with stable employment.  
-3. **Credit Utilization Ratio**: Lower utilization reduces default risk (Variables: "revol_util", "loan_status"). Change: Educate on responsible credit use.  
-4. **Home Ownership Status**: Homeowners have a lower default risk than renters (Variables: "home_ownership", "loan_status"). Change: Create products for homeowners.  
-5. **Credit History Length**: Longer credit histories correlate with lower default risk (Variables: "earliest_cr_line", "loan_status"). Change: Target established credit individuals.  
-6. **Charge-Off History**: Fewer charge-offs indicate lower default risk (Variables: "chargeoff_within_12_mths", "loan_status"). Change: Prioritize clean credit histories for premium products.  
-7. **Credit Inquiries**: Fewer inquiries correlate with lower default risk (Variables: "inq_last_12m", "loan_status"). Change: Educate on inquiry impacts.  
-8. **Debt-to-Income Ratio**: Lower DTI indicates lower default risk (Variables: "dti", "loan_status"). Change: Offer debt management workshops.  
-9. **Geographic Stability**: Stability in residence correlates with lower default risk (Variables: "addr_state", "loan_status"). Change: Target marketing to low-risk regions.  
-10. **Payment History**: On-time payments correlate with lower default risk (Variables: "num_sats", "loan_status"). Change: Reward good payment histories.
+1. **Hypothesis Name:** High Income, Low Default Risk
+   - **Description:** Customers with higher annual income are less likely to default on loans.
+   - **Variables Needed:** `annual_inc`, `loan_status`
+   - **Proposed Change:** Implement targeted marketing campaigns to attract borrowers with an annual income above a certain threshold (e.g., $75,000).
+
+2. **Hypothesis Name:** Employment Stability
+   - **Description:** Borrowers with longer employment history (greater employment length) have a lower risk of default.
+   - **Variables Needed:** `emp_length`, `loan_status`
+   - **Proposed Change:** Develop programs focusing on borrowers with at least 5 years of employment history, potentially offering better loan terms.
+
+3. **Hypothesis Name:** Credit Utilization Impact
+   - **Description:** Lower credit utilization ratios correlate with a reduced likelihood of loan default.
+   - **Variables Needed:** `revol_util`, `loan_status`
+   - **Proposed Change:** Educate customers on maintaining low credit utilization and offer incentives for those who demonstrate responsible credit management.
+
+4. **Hypothesis Name:** Positive Credit History
+   - **Description:** Customers with a higher percentage of trades never delinquent are less likely to default.
+   - **Variables Needed:** `pct_tl_nvr_dlq`, `loan_status`
+   - **Proposed Change:** Create loyalty programs for borrowers who maintain a positive credit history, rewarding them with lower interest rates.
+
+5. **Hypothesis Name:** Home Ownership Status
+   - **Description:** Homeowners have a lower default risk compared to renters.
+   - **Variables Needed:** `home_ownership`, `loan_status`
+   - **Proposed Change:** Focus on marketing campaigns targeting homeowners, offering them loans with favorable terms.
+
+6. **Hypothesis Name:** State of Residence
+   - **Description:** Borrowers from certain states have lower default rates compared to others.
+   - **Variables Needed:** `addr_state`, `loan_status`
+   - **Proposed Change:** Tailor loan products based on geographical risk assessments, promoting loans in states with historically low default rates.
+
+7. **Hypothesis Name:** Loan Purpose Influence
+   - **Description:** The purpose of the loan significantly impacts the likelihood of default.
+   - **Variables Needed:** `purpose`, `loan_status`
+   - **Proposed Change:** Adjust marketing strategies and loan offerings based on the purpose of the loan, promoting products that align with lower-risk purposes.
+
+8. **Hypothesis Name:** Impact of FICO Score Range
+   - **Description:** Borrowers in higher FICO score ranges are less likely to default.
+   - **Variables Needed:** `fico_range_low`, `fico_range_high`, `loan_status`
+   - **Proposed Change:** Implement tiered interest rates where borrowers with higher FICO scores receive better rates, encouraging more high-scoring applicants.
+
+9. **Hypothesis Name:** Low Debt-to-Income Ratios
+   - **Description:** Borrowers with lower debt-to-income ratios are less likely to default.
+   - **Variables Needed:** `dti`, `loan_status`
+   - **Proposed Change:** Focus on attracting borrowers with a DTI below a certain threshold by offering personalized loan solutions.
+
+10. **Hypothesis Name:** Recent Credit Inquiries
+    - **Description:** A high number of recent credit inquiries negatively correlates with loan performance.
+    - **Variables Needed:** `inq_last_12m`, `loan_status`
+    - **Proposed Change:** Educate potential borrowers on the effects of multiple inquiries on their credit score and default risk, while offering pre-qualification options for those with fewer inquiries.
+
+This list of hypotheses will help in identifying low-risk customers and suggesting targeted growth programs to attract similar borrowers. Each hypothesis is designed to be tested with the relevant data, providing actionable insights for business improvements.
